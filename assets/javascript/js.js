@@ -10,7 +10,7 @@ function displayGif() {
   $(document).on("click", ".topic", function () {
     $("#gif-holder").empty();
     var topic = $(this).attr("data-name");
-    var queryURL = "http://api.giphy.com/v1/gifs/search?q=" +
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
     topic + "&api_key=dc6zaTOxFJmzC&limit=10";
     $.ajax({
       url: queryURL,
