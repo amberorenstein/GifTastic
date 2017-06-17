@@ -2,7 +2,7 @@ $( document ).ready(function() {
   console.log( "ready!" );
 
 //variables
-var topics = ["basic", "rainbow", "titus", "zach morris", "sprinkles"];
+var topics = ["basic", "rainbow", "titus", "zach morris", "sprinkles", "beyonce", "waffles", "unicorn", "lisa frank"];
 
 
 //functions
@@ -25,7 +25,12 @@ function displayGif() {
         var rating = results.rating;
         var p = $("<p>").text("Rating: " +rating)
         var image = $("<img>");
-        image.attr("src",results[i].images.fixed_height.url);
+        image.attr({
+          "src": results[i].images.fixed_height_still.url,
+          "data-state": "still",
+          "data-still": results[i].images.fixed_height_still.url,
+          "data-animated":results[i].images.fixed_height.url,
+          });
         image.addClass("gif");
         gifDiv.append(p);
         gifDiv.append(image);
@@ -59,6 +64,24 @@ function renderButtons() {
           $("#button-holder").append(a);
         }
 };
+
+$(document).on("click", ".gif", function(){
+  var state = $(this).attr("data-state");
+
+  if (state === "animated") {
+    var paused = $(this).attr("data-still");
+    $(this).attr({
+      "src": paused,
+      "data-state": "still"});
+} else if (state === "still") {
+    var animated = $(this).attr("data-animated");
+   $(this).attr({
+      "src": animated,
+      "data-state": "animated"});
+}
+
+});
+
 
       $("#add-topic").on("click", function(event) {
         event.preventDefault();
